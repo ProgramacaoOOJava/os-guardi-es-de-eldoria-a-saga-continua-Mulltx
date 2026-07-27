@@ -9,6 +9,6 @@ public class Mago extends Personagem {
     // Implementação específica da habilidade do Mago
     @Override
     public void usarHabilidade() {
-        System.out.println("Habilidade: " + getNome() + " conjura uma bola de fogo!");
+        System.out.println("Habilidade: " + getNome() + " conjura um feitiço de proteção!");
     }
 }
