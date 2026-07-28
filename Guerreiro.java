@@ -1,4 +1,5 @@
-// Subclasse que representa um personagem do tipo Guerreiro
+// Subclasse que representa um personagem do tipo Guerreiro.
+// Não implementa Auditavel, apenas o comportamento comum de Personagem.
 public class Guerreiro extends Personagem {
 
     // Construtor que usa super() para inicializar os dados herdados da superclasse
@@ -9,6 +10,6 @@ public class Guerreiro extends Personagem {
     // Implementação específica da habilidade do Guerreiro
     @Override
     public void usarHabilidade() {
-        System.out.println("Habilidade: " + getNome() + " desfere um golpe devastador!");
+        System.out.println("Habilidade: " + getNome() + " executa um golpe devastador!");
     }
 }
