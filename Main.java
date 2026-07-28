@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
-// Classe principal, responsável por cadastrar os personagens e demonstrar
-// toString, equals, hashCode e instanceof
+// Classe principal, responsável por cadastrar os personagens, executar suas habilidades
+// e demonstrar casting explícito, instanceof e a interface Auditavel
 public class Main {
 
     public static void main(String[] args) {
@@ -18,30 +18,34 @@ public class Main {
         personagens.add(new Guerreiro("Arthemis", 5, 80, 12.5));
         personagens.add(new Guerreiro("Draven", 8, 130, 20.0));
 
-        // Percorrendo a lista com um laço for (estrutura de repetição permitida apenas no main)
+        // Percorrendo a lista com um laço for (permitido apenas no main)
         for (Personagem personagem : personagens) {
 
-            // toString() é chamado implicitamente pelo println, exibindo o status completo
-            System.out.println(personagem);
+            // Exibe o status atual do personagem
+            personagem.exibirStatus();
 
             // Chama a habilidade específica de cada personagem (vinculação dinâmica)
             personagem.usarHabilidade();
 
-            // Usa instanceof para identificar o tipo real do personagem em tempo de execução
-            // e monta uma mensagem personalizada (o if é permitido aqui, pois estamos no main)
-            String tipo = (personagem instanceof Mago) ? "Mago" : "Guerreiro";
-            System.out.println("O personagem " + personagem.getNome() + " é um " + tipo
-                    + " de nível " + personagem.getNivel() + ".");
+            // Usa instanceof para identificar se o personagem é um Mago (o if é permitido aqui, pois estamos no main)
+            if (personagem instanceof Mago) {
+
+                // Registra uma ação diretamente no Mago
+                Mago mago = (Mago) personagem;
+                mago.registrarAcao("Conjurou bola de fogo");
+
+                // Casting explícito para a interface Auditavel, chamando seu contrato
+                Auditavel auditavel = (Auditavel) personagem;
+                auditavel.auditarAcoes();
+            }
+
+            // Casting explícito para Personagem, invocando o método protegido atribuirBencao()
+            ((Personagem) personagem).atribuirBencao(2.0);
+
+            // Exibe o status novamente, já com o poder base atualizado pela bênção
+            System.out.println("Novo poder base após bênção: " + personagem.getPoderBase());
 
             System.out.println("-----------------------------");
         }
-
-        // Comparando dois personagens específicos da lista com equals()
-        Personagem eldoran = personagens.get(0);
-        Personagem arthemis = personagens.get(2);
-
-        String resultadoComparacao = eldoran.equals(arthemis) ? "iguais" : "diferentes";
-        System.out.println("Comparando, " + eldoran.getNome() + " e " + arthemis.getNome()
-                + " são " + resultadoComparacao + ".");
     }
 }
